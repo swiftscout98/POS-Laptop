@@ -17,7 +17,7 @@ public abstract class Person {
     }
 
     // Constructor
-    public Person(String ID, Name name, char gender, String phone, Address[] address) {
+    public Person(String ID, String name, char gender, String phone, Address[] address) {
         this.ID = ID;
         this.name = name;
         this.gender = gender;
@@ -30,7 +30,7 @@ public abstract class Person {
     	this.ID = ID;
     }
     
-	public void setName(Name name){
+	public void setName(String name){
 		this.name = name;
 	}
 	
@@ -51,7 +51,7 @@ public abstract class Person {
     	return ID;
     }
     
-	public Name getName(){
+	public String getName(){
 		return name;
 	}
 	
@@ -89,20 +89,20 @@ public abstract class Person {
 	//name
 	public static boolean isValidName(String name){
 		String namePattern = "^[a-zA-Z\\s]+$";
-		if(name.length() >= 3 && name.lenth()<= 50){
+		if(name.length() >= 3 && name.length()<= 50){
 			return true;
 		}else if(name.matches(namePattern)){
 			return true;
 		}else{
-			System.out.println("The name format should be enter more than 3 and less than 50 of the characters!")
+			System.out.println("The name format should be enter more than 3 and less than 50 of the characters!");
 		}
 		return false;
 	}
 
 	//gender
-	public static boolean isValidGender(String gender){
-		char g1 == Character.toupperCase(gender);
-		if(gender == M || gender == F){
+	public static boolean isValidGender(char gender){
+		char g1 = Character.toUpperCase(gender);
+		if(gender == 'M' || gender == 'F'){
 			return true;
 		}else {
 			System.out.println("The gender you input is wrong");
@@ -112,8 +112,8 @@ public abstract class Person {
 	
 	//phone
 	public static boolean isValidPhone(String phone){
-		String patternPhone = "^[0-9]{10}$"
-		if(phone.length == 10 && phone.matches(patternPhone)){
+		String patternPhone = "^[0-9]{10}$";
+		if(phone.length() == 10 && phone.matches(patternPhone)){
 			return true;
 		}else {
 			System.out.println("The phone pattern is wrong and length should be only 10 characters");
@@ -123,6 +123,7 @@ public abstract class Person {
 
 	//ToStringMethod
 	public String toString(){
+		String genderWords = "";
 		if(gender == 'M'){
 			genderWords = "Male";
 		}else{
