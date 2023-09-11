@@ -1,5 +1,6 @@
-
 import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Staff extends Person{
     //data field
@@ -15,7 +16,7 @@ public class Staff extends Person{
     }
 
     //Constructor 
-    public Staff(String ID, Name name, char gender, String phone, Address[] address, String position, String salesPassword, double salary, Date enterDate){
+    public Staff(String ID, String name, char gender, String phone, Address[] address, String position, String salesPassword, double salary, Date enterDate){
         super(ID, name, gender, phone, address);
         this.position = position;
         this.salary = salary;
@@ -40,9 +41,9 @@ public class Staff extends Person{
         this.enterDate = enterDate;
     }
 
-    public static void setTotalStaff(int totalStaff){
-        this.totalStaff = totalStaff;
-    }
+    public static void setTotalStaff(int totalStaff) {
+	    Staff.totalStaff = totalStaff;
+	}
 
     //get
     public String getPosition(){
@@ -67,15 +68,14 @@ public class Staff extends Person{
     
     @Override
     public String toString() {
-        return String.format("%-30s %-15s %-10s %-15s %-10s",
-               position,salary,enterDate,totalStaff);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Adjust the date format as needed
+
+        return String.format("%-30s %-15s %-15s %-10s %-10s",
+                position, salesPassword, salary, dateFormat.format(enterDate), totalStaff);
     }
 
     public static String getHeaderRow() {
-        return String.format("%-30s %-15s %-10s %-15s %-10s",
-                "Position","Salary","Enter Date","Total Staff");
+        return String.format("%-30s %-15s %-15s %-10s %-10s",
+                "Position", "Sales Password", "Salary", "Enter Date", "Total Staff");
     }
-
-    //System.out.println(Staff.getHeaderRow());
-    //System.out.println(staff.toString());
 }
