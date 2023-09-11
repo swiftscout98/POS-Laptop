@@ -1,6 +1,4 @@
-import java.util.regex.*; //Regular expression
-
-abstract public class Person {
+public abstract class Person {
     // Data fields
     private String ID;
     private String name;
@@ -130,8 +128,11 @@ abstract public class Person {
 		}else{
 			genderWords = "Female";
 		}
-
-		return "\tID\t\tName\t\tGender\t\tPhone\t\tAddress" +
-				ID , name, genderWords, phone, address.toString();
+		return String.format("%-10s %-20s %-6s %-15s",
+				ID , name, genderWords, phone, address.toString());
 	}
+
+	public static String getHeaderRow(){
+		return String.format("%-10s %-20s %-6s %-15s", "ID", "Name", "Phone", "Address");
+	} 
 }
