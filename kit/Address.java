@@ -122,7 +122,6 @@ public class Address{
 	}
 	
 	//To String Method
-	@Override
 	public String toString() {
 	    return "Home Address: " + homeAddress + "\n" +
 	           "Zip Code: " + zipCode + "\n" +
