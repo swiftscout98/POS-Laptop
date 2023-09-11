@@ -100,10 +100,10 @@ public class Address{
 		if(city.length() > 5 && city.length() < 35 && city.matches(cityPattern)){
 			return true;
 		}else{
-			//method 1: System.out.println("The city length or pattern is invalid.");
+			System.out.println("The city length or pattern is invalid.");
 			//method 2:
 			// Throw an IllegalArgumentException with a descriptive message
-			throw new IllegalArgumentException("Invalid city name: " + city);
+			//throw new IllegalArgumentException("Invalid city name: " + city);
 		}
 		
 	}
@@ -123,10 +123,14 @@ public class Address{
 	
 	//To String Method
 	public String toString() {
-	    return "Home Address: " + homeAddress + "\n" +
-	           "Zip Code: " + zipCode + "\n" +
-	           "City: " + city + "\n" +
-	           "State: " + state + "\n";
+		return String.format("Home Address: %-30s Zip Code: %-10s City: %-20s State: %-10s",
+				homeAddress, zipCode, city, state);
+	}
+
+	//To Display Method	
+	public static void display(String homeAddress, String zipCode, String city, String state){
+		String formattedAddress = String.format("Home Address: %-30s Zip Code: %-10s City: %-20s State: %-10s",
+            homeAddress, zipCode, city, state);
 	}
 	
 }
