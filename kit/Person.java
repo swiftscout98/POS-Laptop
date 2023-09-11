@@ -1,7 +1,7 @@
-public class Person {
+abstract public class Person {
     // Data fields
     private String ID;
-    private Name name;
+    private String name;
     private char gender;
     private String phone;
     private Address[] address;
@@ -10,7 +10,7 @@ public class Person {
     public Person() {
         // Initialize the data fields with default values or leave them empty
         ID = "";
-        name = new Name(); // Assuming Name has a no-argument constructor
+        name = ""; // Assuming Name has a no-argument constructor
         gender = ' ';
         phone = "";
         address = new Address[0]; // An empty array of Address objects
@@ -86,6 +86,19 @@ public class Person {
 	    return false;
 	}
 	
+	//name
+	public static boolean isValidName(String name){
+		String namePattern = "^[a-zA-Z\\s]+$";
+		if(name.length() >= 3 && name.lenth()<= 50){
+			return true;
+		}else if(name.matches(namePattern)){
+			return true;
+		}else{
+			System.out.println("The name format should be enter more than 3 and less than 50 of the characters!")
+		}
+		return false;
+	}
+
 	//gender
 	public static boolean isValidGender(String gender){
 		char g1 == Character.toupperCase(gender);
@@ -106,5 +119,17 @@ public class Person {
 			System.out.println("The phone pattern is wrong and length should be only 10 characters");
 		}
 		return false;
+	}
+
+	//ToStringMethod
+	public String toString(){
+		if(gender == 'M'){
+			genderWords = "Male";
+		}else{
+			genderWords = "Female";
+		}
+
+		return "\tID\t\tName\t\tGender\t\tPhone\t\tAddress" +
+				ID , name, genderWords, phone, address.toString();
 	}
 }
