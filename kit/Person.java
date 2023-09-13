@@ -1,24 +1,28 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public abstract class Person {
     // Data fields
-    private String ID;
-    private String name;
-    private char gender;
-    private String phone;
-    private Address[] address;
+    protected String ID;
+    protected String name;
+    protected char gender;
+    protected String phone;
+    protected Address address;
+
+	private Date date = new Date();
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    protected String regDate = dateFormat.format(date);
 
     //no-argument 
     public Person() {
-        // Initialize the data fields with default values or leave them empty
-        ID = "";
-        name = ""; // Assuming Name has a no-argument constructor
+        name = ""; 
         gender = ' ';
         phone = "";
-        address = new Address[0]; // An empty array of Address objects
+        address = new Address(); 
     }
 
-    // Constructor
-    public Person(String ID, String name, char gender, String phone, Address[] address) {
-        this.ID = ID;
+    //Constructor
+    public Person(String name, char gender, String phone, Address address) {
         this.name = name;
         this.gender = gender;
         this.phone = phone;
@@ -26,10 +30,6 @@ public abstract class Person {
     }
     
 	//set
-    public void setID(String ID){
-    	this.ID = ID;
-    }
-    
 	public void setName(String name){
 		this.name = name;
 	}
@@ -42,7 +42,7 @@ public abstract class Person {
 		this.phone = phone;
 	}
 	
-	public void setAddress(Address[] address){
+	public void setAddress(Address address){
 		this.address = address;
 	}
 	
@@ -63,7 +63,7 @@ public abstract class Person {
 		return phone;
 	}
 	
-	public Address[] getAddress(){
+	public Address getAddress(){
 		return address;
 	}
 	
@@ -88,20 +88,18 @@ public abstract class Person {
 	
 	//name
 	public static boolean isValidName(String name){
-		String namePattern = "^[a-zA-Z\\s]+$";
-		if(name.length() >= 3 && name.length()<= 50){
-			return true;
-		}else if(name.matches(namePattern)){
+		String namePattern = "^[a-zA-Z\\s]{3,50}$";
+		if(name.matches(namePattern)){
 			return true;
 		}else{
-			System.out.println("The name format should be enter more than 3 and less than 50 of the characters!");
+			System.out.println("The name format should be enter more than 3 and less than 50 of the characters");
 		}
 		return false;
 	}
 
 	//gender
 	public static boolean isValidGender(char gender){
-		char g1 = Character.toUpperCase(gender);
+		gender = Character.toUpperCase(gender);
 		if(gender == 'M' || gender == 'F'){
 			return true;
 		}else {
@@ -129,11 +127,12 @@ public abstract class Person {
 		}else{
 			genderWords = "Female";
 		}
-		return String.format("%-10s %-20s %-6s %-15s",
+		return String.format("\t\t%s\n\t\t%s\n\t\t%s\n\t\t%s",
 				ID , name, genderWords, phone, address.toString());
 	}
 
-	public static String getHeaderRow(){
-		return String.format("%-10s %-20s %-6s %-15s", "ID", "Name", "Phone", "Address");
-	} 
+	public abstract String getRow();
+
+	
+	Create Edit Delete function?
 }
