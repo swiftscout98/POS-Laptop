@@ -1,13 +1,11 @@
-import java.util.Arrays;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Staff extends Person{
     //data field
     private String position;
-    private String salesPassword;
+    private String password;
     private double salary;
-    private Date enterDate;
     private static int totalStaff = 0;
 
     //No constructor arguement
@@ -16,11 +14,13 @@ public class Staff extends Person{
     }
 
     //Constructor 
-    public Staff(String ID, String name, char gender, String phone, Address[] address, String position, String salesPassword, double salary, Date enterDate){
+    public Staff(String name, char gender, String phone, Address address, String position, String password, double salary){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyy");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HHmm");
+        String orderID = String.format("%sStf%s", dateFormat.format(date),timeFormat.format(date));
         super(ID, name, gender, phone, address);
         this.position = position;
         this.salary = salary;
-        this.enterDate = enterDate;
         totalStaff ++;
     }
     
@@ -37,7 +37,7 @@ public class Staff extends Person{
         this.salary = salary;
     }
 
-    public void setEnterDate(Date enterDate){
+    public void setEnterDate(String enterDate){
         this.enterDate = enterDate;
     }
 
@@ -58,7 +58,7 @@ public class Staff extends Person{
         return salary;
     }
 
-    public Date setEnterDate(){
+    public String setEnterDate(){
         return enterDate;
     }
 
@@ -66,16 +66,15 @@ public class Staff extends Person{
         return totalStaff;
     }
     
-    @Override
+
     public String toString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Adjust the date format as needed
-
-        return String.format("%-30s %-15s %-15s %-10s %-10s",
-                position, salesPassword, salary, dateFormat.format(enterDate), totalStaff);
+        return String.format("%s\t\t\nPosition :%s\t\t\nSalary: %s",
+                super.toString(),points,position);
     }
 
-    public static String getHeaderRow() {
-        return String.format("%-30s %-15s %-15s %-10s %-10s",
-                "Position", "Sales Password", "Salary", "Enter Date", "Total Staff");
+    @Override
+    public String getRow() {
+        return String.format("\t\t%-10s %-20s %-15s %-10lf %-15s",super.ID, super.name, position, salary, regDate);
     }
+
 }
